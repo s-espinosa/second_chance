@@ -1,0 +1,20 @@
+:root {
+  --dark-purple: #331832;
+  --light-purple: #91448E;
+  --dark-blue: #000055;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  padding: 1px;
+  border: 2px solid var(--dark-purple);
+  background-color: var(--light-purple);
+  margin: 1px;
+}
