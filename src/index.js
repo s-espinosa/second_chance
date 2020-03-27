@@ -1,4 +1,4 @@
-import { patterns } from "./javascript/patterns"
+import { patterns } from "./modules/patterns"
 
 const pieces = document.querySelector('#pieces');
 
