@@ -10,11 +10,23 @@
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
-  border-radius: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: px;
   padding: 1px;
-  border: 2px solid var(--dark-purple);
-  background-color: var(--light-purple);
   margin: 1px;
 }
+
+.occupied {
+  border: 1px solid var(--dark-purple);
+  background-color: var(--light-purple);
+}
+
+.empty {
+  border: 1px solid white;
+}
+
+.shape {
+  margin: 20px;
+}
+

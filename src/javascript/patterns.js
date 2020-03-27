@@ -1,4 +1,4 @@
-normalPatterns = [
+let normalPatterns = [
   {
     count: 3,
     cells: [
@@ -264,7 +264,7 @@ normalPatterns = [
   }
 ]
 
-startingPatterns = [
+let startingPatterns = [
   {
     count: 1,
     cells: [
@@ -386,4 +386,4 @@ startingPatterns = [
   }
 ]
 
-module.exports = {startingPatterns: startingPatterns, normalPatterns: normalPatterns}
+export const patterns = {startingPatterns: startingPatterns, normalPatterns: normalPatterns}
