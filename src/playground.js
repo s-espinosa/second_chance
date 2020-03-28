@@ -1,15 +1,21 @@
 import { patterns } from "./modules/patterns"
 
-const starter = document.querySelector('#starter');
+const pieces = document.querySelector('#pieces');
 
 let startingPatterns = patterns['startingPatterns']
+let normalPatterns = patterns['normalPatterns']
 
-let startingPattern = startingPatterns[Math.floor(Math.random() * startingPatterns.length)]
+startingPatterns.forEach((pattern) => {
+  let shape = createShape(pattern)
+  pieces.appendChild(shape)
+})
 
-let shape = createStarter(startingPattern)
-starter.appendChild(shape)
+normalPatterns.forEach((pattern) => {
+  let shape = createShape(pattern)
+  pieces.appendChild(shape)
+})
 
-function createStarter(pattern) {
+function createShape(pattern) {
   let shape = document.createElement('div')
   shape.setAttribute('class', 'shape')
 
@@ -30,13 +36,13 @@ function createStarter(pattern) {
 
 function emptyCell() {
   let cell = document.createElement("div");
-  cell.setAttribute('class', 'empty large cell')
+  cell.setAttribute('class', 'empty cell')
   return cell
 }
 
 function occupiedCell() {
   let cell = document.createElement("div");
-  cell.setAttribute('class', 'occupied large cell')
+  cell.setAttribute('class', 'occupied cell')
   return cell
 }
 

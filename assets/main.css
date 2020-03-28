@@ -7,12 +7,13 @@
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .cell {
   width: 10px;
   height: 10px;
-  border-radius: px;
+  border-radius: 1 px;
   padding: 1px;
   margin: 1px;
 }
@@ -28,5 +29,13 @@
 
 .shape {
   margin: 20px;
+  margin-top: 10%;
 }
 
+.large {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  padding: 6px;
+  margin: 6px;
+}
