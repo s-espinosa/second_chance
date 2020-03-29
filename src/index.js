@@ -32,8 +32,17 @@ function shufflePop(array) {
 function addNormalShapes() {
   const normalPatterns = patterns['normalPatterns']
   const startingShapes = shapeCollection(normalPatterns)
-  console.log(startingShapes)
-  // add shapes to admin page in rows of 5
+  let i = 1
+  let shapeRow = emptyShapeRow()
+  startingShapes.forEach((shape) => {
+    shapeRow.appendChild(shape)
+    if(i % 6 == 0) {
+      piecesDiv.appendChild(shapeRow)
+      shapeRow = emptyRow()
+    }
+    i = i + 1
+  })
+  // add script to each shape that makes it current shape and turns it off when it's clicked
 }
 
 function shapeCollection(shapePatterns) {
@@ -59,7 +68,7 @@ function smallShape(pattern) {
 }
 
 function shape(size, pattern) {
-  let shape = emptyShape()
+  let shape = emptyShape(size)
   pattern.cells.forEach((rowPattern) => {
     let rowElement = populatedRow(rowPattern, size)
     shape.appendChild(rowElement)
@@ -71,17 +80,17 @@ function populatedRow(rowPattern, size) {
   let rowElement = emptyRow()
   rowPattern.forEach((cell) => {
     if(cell === 1) {
-      rowElement.appendChild(cellElement(`occupied ${size} cell`))
+      rowElement.appendChild(cellElement(`occupied ${size}-cell`))
     } else {
-      rowElement.appendChild(cellElement(`empty ${size} cell`))
+      rowElement.appendChild(cellElement(`empty ${size}-cell`))
     }
   })
   return rowElement
 }
 
-function emptyShape() {
+function emptyShape(size) {
   let shape = document.createElement('div')
-  shape.setAttribute('class', 'shape')
+  shape.setAttribute('class', `${size}-shape`)
   return shape
 }
 
@@ -97,6 +106,12 @@ function cellElement(classes) {
 function emptyRow() {
   const row = document.createElement("div");
   row.setAttribute('class', 'row')
+  return row
+}
+
+function emptyShapeRow() {
+  const row = document.createElement("div");
+  row.setAttribute('class', 'shape-row')
   return row
 }
 
