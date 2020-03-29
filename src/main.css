@@ -2,6 +2,7 @@
   --dark-purple: #331832;
   --light-purple: #91448E;
   --dark-blue: #000055;
+  --light-blue: #0000AA;
 }
 
 .row {
@@ -49,6 +50,16 @@
 
 .empty {
   border: 1px solid white;
+}
+
+.used {
+  border: 1px solid var(--dark-blue);
+  background-color: var(--light-blue);
+}
+
+.active {
+  border: 1px solid red;
+  background-color: red;
 }
 
 .large-shape {
