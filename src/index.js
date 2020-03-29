@@ -1,49 +1,102 @@
-import { patterns } from "./modules/patterns"
+import { patterns } from "./modules/patterns";
+import "./main.css";
 
-const starter = document.querySelector('#starter');
+const starterDiv = document.querySelector('#starter');
+const piecesDiv = document.querySelector('#pieces');
 
-let startingPatterns = patterns['startingPatterns']
+if (starterDiv != null) {
+  addRandomStarter(patterns['startingPatterns'])
+} else {
+  addNormalShapes()
+}
 
-let startingPattern = startingPatterns[Math.floor(Math.random() * startingPatterns.length)]
 
-let shape = createStarter(startingPattern)
-starter.appendChild(shape)
+// ADD STARTING SHAPE
+function addRandomStarter(patterns) {
+  const startingShape = randomStarter(patterns)
+  starterDiv.appendChild(startingShape)
+}
 
-function createStarter(pattern) {
-  let shape = document.createElement('div')
-  shape.setAttribute('class', 'shape')
+function randomStarter(patterns) {
+  const startingPattern = shufflePop(patterns)
+  let shape = largeShape(startingPattern)
+  return shape
+}
 
-  let cells = pattern.cells
-  cells.forEach((row) => {
-    let rowElement = emptyRow()
-    row.forEach((cell) => {
-      if(cell === 1) {
-        rowElement.appendChild(occupiedCell())
-      } else {
-        rowElement.appendChild(emptyCell())
-      }
-    })
+function shufflePop(array) {
+  return array[Math.floor(Math.random() * array.length)]
+}
+
+
+// ADD NORMAL SHAPES
+function addNormalShapes() {
+  const normalPatterns = patterns['normalPatterns']
+  const startingShapes = shapeCollection(normalPatterns)
+  console.log(startingShapes)
+  // add shapes to admin page in rows of 5
+}
+
+function shapeCollection(shapePatterns) {
+  let shapeCollection = []
+  shapePatterns.forEach((pattern) => {
+    let quantity = pattern['count']
+    let cells = pattern['cells']
+    for(var i=0; i < quantity; i++){
+      let shape = smallShape(pattern)
+      shapeCollection.push(shape)
+    }
+  })
+  return shapeCollection
+}
+
+// HELPERS
+function largeShape(pattern) {
+  return shape('large', pattern)
+}
+
+function smallShape(pattern) {
+  return shape('small', pattern)
+}
+
+function shape(size, pattern) {
+  let shape = emptyShape()
+  pattern.cells.forEach((rowPattern) => {
+    let rowElement = populatedRow(rowPattern, size)
     shape.appendChild(rowElement)
   })
   return shape
 }
 
-function emptyCell() {
-  let cell = document.createElement("div");
-  cell.setAttribute('class', 'empty large cell')
+function populatedRow(rowPattern, size) {
+  let rowElement = emptyRow()
+  rowPattern.forEach((cell) => {
+    if(cell === 1) {
+      rowElement.appendChild(cellElement(`occupied ${size} cell`))
+    } else {
+      rowElement.appendChild(cellElement(`empty ${size} cell`))
+    }
+  })
+  return rowElement
+}
+
+function emptyShape() {
+  let shape = document.createElement('div')
+  shape.setAttribute('class', 'shape')
+  return shape
+}
+
+
+// CELL HELPERS
+function cellElement(classes) {
+  const cell = document.createElement("div");
+  cell.setAttribute('class', classes)
   return cell
 }
 
-function occupiedCell() {
-  let cell = document.createElement("div");
-  cell.setAttribute('class', 'occupied large cell')
-  return cell
-}
-
+// ROW HELPERS
 function emptyRow() {
-  let row = document.createElement("div");
+  const row = document.createElement("div");
   row.setAttribute('class', 'row')
   return row
 }
-
 
