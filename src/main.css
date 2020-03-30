@@ -86,7 +86,7 @@ body {
 }
 
 .active {
-  border: 1px solid var(--used-shape);
+  border: 1px solid var(--current-shape);
   background-color: var(--current-shape);
 }
 
