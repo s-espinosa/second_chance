@@ -37,8 +37,8 @@ piecesDiv.onclick = function(event) {
 
   const currentDiv = document.querySelector('#current');
   console.log(currentDiv.children[0])
-  if (currentDiv.children[0]) {
-    currentDiv.replaceChild(large, currentDiv.children[0])
+  if (currentDiv.children[1]) {
+    currentDiv.replaceChild(large, currentDiv.children[1])
   } else {
     currentDiv.appendChild(large)
   }

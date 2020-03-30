@@ -1,8 +1,32 @@
 :root {
-  --dark-purple: #331832;
-  --light-purple: #91448E;
-  --dark-blue: #000055;
-  --light-blue: #0000AA;
+  --background: #DAD2D8;
+  --current-shape: #A8201A;
+  --normal-shape: #143642;
+  --used-shape: #0F8B8D;
+  --highlight: #EC9A29;
+}
+
+h1, h2 {
+  font-family: azo-sans-uber, sans-serif;
+  font-weight: 400;
+  font-size: 8em;
+  font-style: normal;
+  color: var(--highlight);
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+h1 {
+  font-size: 8em;
+}
+
+h2 {
+  font-size: 3em;
+  margin-top: 0px;
+}
+
+body {
+  background-color: var(--background);
 }
 
 .row {
@@ -44,8 +68,8 @@
 }
 
 .occupied {
-  border: 1px solid var(--dark-purple);
-  background-color: var(--light-purple);
+  border: 1px solid var(--normal-shape);
+  background-color: var(--normal-shape);
 }
 
 .empty {
@@ -53,22 +77,22 @@
 }
 
 .used {
-  border: 1px solid var(--dark-blue);
-  background-color: var(--light-blue);
+  border: 1px solid var(--used-shape);
+  background-color: var(--used-shape);
 }
 
 .active {
-  border: 1px solid red;
-  background-color: red;
+  border: 1px solid var(--used-shape);
+  background-color: var(--current-shape);
 }
 
 .large-shape {
   margin: 20px;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .small-shape {
-  margin: 20px;
+  margin: 15px;
   width: 80px;
 }
 
