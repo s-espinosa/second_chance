@@ -9,39 +9,54 @@ if (starterDiv != null) {
   addRandomStarter(patterns['startingPatterns'])
 } else {
   addNormalShapes()
+  addListeners()
 }
 
-piecesDiv.onclick = function(event) {
-  let target = event.target.closest('.small-shape')
-  if (!target) return
-  target.childNodes.forEach((row) => {
-    row.childNodes.forEach((cell) => {
-      if (cell.classList.contains('occupied')) {
-        cell.classList.add('used')
-      }
+function addListeners() {
+  addSmallPieceListeners()
+  addRemover()
+}
+
+function addSmallPieceListeners() {
+  piecesDiv.onclick = function(event) {
+    let target = event.target.closest('.small-shape')
+    if (!target) return
+    markShapeAsUsed(target)
+    let large = createMediumShape(target)
+    addShape(large)
+  }
+}
+
+function addRemover() {
+  const currentDiv = document.querySelector('#current');
+  currentDiv.onclick = function(event) {
+    const mediumShapes = document.getElementsByClassName("medium-shape");
+    Array.from(mediumShapes).forEach((shape) => {
+      shape.remove()
     })
-  })
-  let large = target.cloneNode(true)
-  large.classList.remove('small-shape')
-  large.classList.add('large-shape')
-  large.childNodes.forEach((row) => {
+  }
+}
+
+function createMediumShape(target) {
+  let medium = target.cloneNode(true)
+  medium.classList.remove('small-shape')
+  medium.classList.add('medium-shape')
+  medium.childNodes.forEach((row) => {
     row.childNodes.forEach((cell) => {
       cell.classList.remove('small-cell')
       cell.classList.remove('used')
-      cell.classList.add('large-cell')
+      cell.classList.add('medium-cell')
       if (cell.classList.contains('occupied')) {
         cell.classList.add('active')
       }
     })
   })
+  return medium
+}
 
+function addShape(large) {
   const currentDiv = document.querySelector('#current');
-  console.log(currentDiv.children[0])
-  if (currentDiv.children[1]) {
-    currentDiv.replaceChild(large, currentDiv.children[1])
-  } else {
-    currentDiv.appendChild(large)
-  }
+  currentDiv.appendChild(large)
 }
 
 
@@ -67,7 +82,6 @@ function addNormalShapes() {
   const normalPatterns = patterns['normalPatterns']
   const normalShapes = shapeCollection(normalPatterns)
   addShapes(normalShapes)
-  // add script to each shape that makes it current shape and turns it off when it's clicked
 }
 
 function shapeCollection(shapePatterns) {
@@ -154,3 +168,12 @@ function emptyShapeRow() {
   return row
 }
 
+function markShapeAsUsed(target) {
+  target.childNodes.forEach((row) => {
+    row.childNodes.forEach((cell) => {
+      if (cell.classList.contains('occupied')) {
+        cell.classList.add('used')
+      }
+    })
+  })
+}
